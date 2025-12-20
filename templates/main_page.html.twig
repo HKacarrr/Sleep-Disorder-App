@@ -153,10 +153,10 @@
                 let response = data.response;
                 responseDiv.html(response);
                 responseDiv.removeClass("d-none");
-                analyzingYourSleepLoaderDiv.hide();
+                analyzingYourSleepLoaderDiv.addClass("d-none");
             },
             'error' : function(request,error) {
-                analyzingYourSleepLoaderDiv.hide();
+                analyzingYourSleepLoaderDiv.addClass("d-none");
             }
         });
     }
