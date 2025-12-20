@@ -72,7 +72,7 @@
                            <div class="mb-5">
                                <label for="sleep-quality-input" class="form-label fw-bold">➡️ Sleep Quality</label>
                                <div class="d-flex w-100 gap-2">
-                                   <input type="range" min="1" max="10" value="5" class="form-control" id="sleep-quality-input" name="job" aria-describedby="sleep-quality-help" />
+                                   <input type="range" min="1" max="10" value="5" class="form-control" id="sleep-quality-input" name="sleep_quality" aria-describedby="sleep-quality-help" />
                                    <output for="sleep-quality-input" id="sleep-quality-range-value" aria-hidden="true"></output>
                                </div>
                                <div id="sleep-quality-help" class="form-text">ℹ️ Rate how restful your sleep felt overall.</div>
@@ -107,6 +107,8 @@
                 </div>
             </div>
         </div>
+
+        <div id="response-div" class="mt-3 card p-2 d-none"></div>
     </div>
 
 
@@ -134,17 +136,23 @@
     });
 
     analyze = () => {
+        let responseDiv = $("#response-div");
+        responseDiv.addClass("d-none");
+
         var analyzingYourSleepLoaderDiv = $("#analyzing-your-sleep-main-div");
         analyzingYourSleepLoaderDiv.removeClass("d-none");
+
         var formData = $("#analyze-form").serializeJSON();
         formData.short_life_description = $("#short-life-description").val();
-        console.log(formData);
 
         $.ajax({
             'url' : '{{ path('sleep_analyze') }}',
             'type' : 'POST',
             'data' : formData,
             'success' : function(data) {
+                let response = data.response;
+                responseDiv.html(response);
+                responseDiv.removeClass("d-none");
                 analyzingYourSleepLoaderDiv.hide();
             },
             'error' : function(request,error) {
