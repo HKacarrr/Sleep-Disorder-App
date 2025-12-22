@@ -2,6 +2,7 @@
 
 namespace App\Service\Agent\SleepDisorder\Trait;
 
+use App\Service\Agent\TextEditor\TextEditorAgentService;
 use App\Service\Dataset\SleepHealth\SleepHealthDatasetService;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -15,6 +16,15 @@ trait PrivateFunctionProviderTrait
     private function getSleepHealthDatasetService(): SleepHealthDatasetService
     {
         return $this->container->get(SleepHealthDatasetService::class);
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    private function getTextEditorAgentService(): TextEditorAgentService
+    {
+        return $this->container->get(TextEditorAgentService::class);
     }
 
     /**

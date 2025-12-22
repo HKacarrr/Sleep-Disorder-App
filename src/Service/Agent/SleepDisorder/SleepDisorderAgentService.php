@@ -5,6 +5,7 @@ namespace App\Service\Agent\SleepDisorder;
 use App\Service\Agent\AbstractAgentService;
 use App\Service\Agent\SleepDisorder\Trait\PrivateFunctionProviderTrait;
 use App\Service\Agent\SleepDisorder\Trait\SleepDisorderAgentServiceGetterSetterTrait;
+use App\Service\Agent\TextEditor\TextEditorAgentService;
 use App\Service\Dataset\SleepHealth\SleepHealthDatasetService;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -20,7 +21,8 @@ class SleepDisorderAgentService extends AbstractAgentService
     public static function getSubscribedServices(): array
     {
         return array_merge([
-            SleepHealthDatasetService::class
+            SleepHealthDatasetService::class,
+            TextEditorAgentService::class
         ], parent::getSubscribedServices());
     }
 
@@ -51,13 +53,16 @@ class SleepDisorderAgentService extends AbstractAgentService
     public function analyze(): array
     {
         $this->setDataAttributes();
+        $editedLifeDescription = $this->getTextEditorAgentService()->editText($this->lifeDescription);
+        $this->lifeDescription = $editedLifeDescription;
+
         $response = $this->getHttpClient()->request('POST', 'http://localhost:11434/api/generate', [
             'json' => [
                 'model' => 'qwen2.5:7b',
                 'prompt' => $this->getPrompt(),
                 'stream' => false,
                 'options' => [
-                    'temperature' => 0.3
+                    'temperature' => 0.1
                 ]
             ],
             'timeout' => 120
