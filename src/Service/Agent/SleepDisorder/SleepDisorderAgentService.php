@@ -7,6 +7,7 @@ use App\Service\Agent\SleepDisorder\Trait\PrivateFunctionProviderTrait;
 use App\Service\Agent\SleepDisorder\Trait\SleepDisorderAgentServiceGetterSetterTrait;
 use App\Service\Agent\TextEditor\TextEditorAgentService;
 use App\Service\Dataset\SleepHealth\SleepHealthDatasetService;
+use App\Service\NLP\PreProcessing\NlpPreProcessingService;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -22,7 +23,8 @@ class SleepDisorderAgentService extends AbstractAgentService
     {
         return array_merge([
             SleepHealthDatasetService::class,
-            TextEditorAgentService::class
+            TextEditorAgentService::class,
+            NlpPreProcessingService::class
         ], parent::getSubscribedServices());
     }
 
@@ -54,7 +56,8 @@ class SleepDisorderAgentService extends AbstractAgentService
     {
         $this->setDataAttributes();
         $editedLifeDescription = $this->getTextEditorAgentService()->editText($this->lifeDescription);
-        $this->lifeDescription = $editedLifeDescription;
+        $preProcessesLifeDescription = $this->getNlpPreProcessingService()->setText($editedLifeDescription)->preProcessing();
+        $this->lifeDescription = $preProcessesLifeDescription;
 
         $response = $this->getHttpClient()->request('POST', 'http://localhost:11434/api/generate', [
             'json' => [
