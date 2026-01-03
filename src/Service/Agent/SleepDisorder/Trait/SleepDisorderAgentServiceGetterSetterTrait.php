@@ -23,7 +23,7 @@ trait SleepDisorderAgentServiceGetterSetterTrait
         $this->job = @$data["job"];
         $this->sleepDuration = @$data["sleep_duration"];
         $this->nightAwakenings = @$data["night_awakenings"];
-        $this->sleepQuality = @$data["sleep_quality"];
+//        $this->sleepQuality = @$data["sleep_quality"];
         $this->lifeDescription = @$data["short_life_description"];
     }
 }

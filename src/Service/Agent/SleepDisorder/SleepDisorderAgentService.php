@@ -37,7 +37,7 @@ class SleepDisorderAgentService extends AbstractAgentService
     private string $gender;
     private int $age;
     private string $job;
-    private float $sleepDuration;
+//    private float $sleepDuration;
     private int $nightAwakenings;
     private int $sleepQuality;
     private string $lifeDescription;
@@ -55,9 +55,9 @@ class SleepDisorderAgentService extends AbstractAgentService
     public function analyze(): array
     {
         $this->setDataAttributes();
-        $editedLifeDescription = $this->getTextEditorAgentService()->editText($this->lifeDescription);
-        $preProcessesLifeDescription = $this->getNlpPreProcessingService()->setText($editedLifeDescription)->preProcessing();
-        $this->lifeDescription = $preProcessesLifeDescription;
+//        $editedLifeDescription = $this->getTextEditorAgentService()->editText($this->lifeDescription);
+//        $preProcessesLifeDescription = $this->getNlpPreProcessingService()->setText($editedLifeDescription)->preProcessing();
+//        $this->lifeDescription = $preProcessesLifeDescription;
 
         $response = $this->getHttpClient()->request('POST', 'http://localhost:11434/api/generate', [
             'json' => [
@@ -68,7 +68,7 @@ class SleepDisorderAgentService extends AbstractAgentService
                     'temperature' => 0.1
                 ]
             ],
-            'timeout' => 120
+            'timeout' => 300
         ]);
 
         return $response->toArray();

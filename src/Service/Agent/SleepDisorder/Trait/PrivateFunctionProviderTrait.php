@@ -45,7 +45,7 @@ trait PrivateFunctionProviderTrait
     {
         $csvContent =  $this->getSleepHealthDatasetService()->getDataset();
         return <<<EOT
-            Sen uzman bir Uyku Bilimcisi ve Psikologsun. Analiz yaparken sadece sayısal verilere değil, kullanıcının "öznel algısı" ile "nesnel verileri" arasındaki tutarsızlığa da odaklanmalısın.
+            Sen uzman bir Uyku Bilimcisi ve Psikologsun
 
             ### 1. REFERANS VERİ SETİ (CSV):
             $csvContent
@@ -92,10 +92,8 @@ trait PrivateFunctionProviderTrait
             Aşağıdaki mantık çerçevesinde analiz et:
 
             A) VERİSEL KIYAS: Kullanıcının verilerini CSV'deki tüm sütun değerleri ile kıyasla. (Her değeri her sütun ile değil. Uygun sütun değerleri ile kıyaslama yap)
-            B) ALGILANAN VS. GERÇEK: Kullanıcının uyku kalitesi düşük ama yaşam tarzı düzgünse başka bir ihtimal değerlendir. Ama yaşam tarzında da kötü belirtiler varsa uyku bozukluğu ile ilgili "Uyku Bozukluğu Hastalıkları ve Belirtileri"
-            bölümünden bir hastalık tahmini yapabilirsin.
-            C) BİLİŞSEL YÜK: $this->lifeDescription ve diğe bilgileri tartış.
-            D) SONUÇ: Girilen bilgilere göre gerçek bir analiz yap. Girilen bilgiler : $this->gender, $this->age, $this->job, $this->sleepDuration, $this->nightAwakenings, $this->lifeDescription. Ayrıca kullanıcı $this->lifeDescription içinde
+            B) BİLİŞSEL YÜK: $this->lifeDescription ve diğe bilgileri tartış.
+            C) SONUÇ: Girilen bilgilere göre gerçek bir analiz yap. Girilen bilgiler : $this->gender, $this->age, $this->job, $this->sleepDuration, $this->nightAwakenings, $this->lifeDescription. Ayrıca kullanıcı $this->lifeDescription içinde
             bazı belirtiler girmişse bir hastalık tahmini de yapabilirsin(Hastalığı o belirtilere göre yap lütfen) Belirtilere göre hastalıkları "Uyku Bozukluğu Hastalıkları ve Belirtileri" kısmındaki bilgilerden
             yararlanabilirsin. Ayrıca sonuçların referans noktası her zaman CSV içerisindeki örnekler olmalı. Eğer ki kullanıcı herhangi bir belirti belirtmemişse bir hastalık ile bağdaştırma
 

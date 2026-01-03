@@ -36,7 +36,7 @@ class TextEditorAgentService extends AbstractAgentService
                     'temperature' => 0.1
                 ]
             ],
-            'timeout' => 120
+            'timeout' => 300
         ]);
 
         $arrayResponse = $response->toArray();
