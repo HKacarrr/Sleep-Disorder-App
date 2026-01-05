@@ -108,6 +108,7 @@ trait PrivateFunctionProviderTrait
             **Cevaplar HTML formatında dönsün. Fakat **```html** bu değerler olmasın cevapta. Örnepin başlıklar <b>Kullanıcı Profili</b> gibi dönsün. Başlıkların cevapları da div tagı içinde dönebilir. Ayrıca boşluk gerekiyorsa br ekleyebilirsin
             **A) VERİSEL KIYAS: - B) ALGILANAN VS. GERÇEK - C) BİLİŞSEL YÜK: - D) SONUÇ: cevapları sonrası <br><br> tagını koymayı unutma. <br><br> tagları cevaplardan sonra eklenmeli başlıktan sonra değil.
             ** Son olarak kullanıcıya birkaç tavsiye verilebilir.
+            ** Cevaplarsa anlatım bozukluğu olmasın. Akıcı ve anlaşılır bir dil kullan. Ayrıca yazım yanlışlarına da dikkat et.
         EOT;
     }
 }
